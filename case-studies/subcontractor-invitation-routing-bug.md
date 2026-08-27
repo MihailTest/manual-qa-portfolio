@@ -10,8 +10,8 @@ The platform connected contractors with subcontractors and allowed contractors t
 
 The invitation flow depended on whether the subcontractor already had an account:
 
-* Existing subcontractor – receives the job invitation directly inside the platform.
-* External subcontractor – does not have an account yet and receives the job invitation by email.
+* Existing subcontractor - receives the job invitation directly inside the platform.
+* External subcontractor - does not have an account yet and receives the job invitation by email.
 
 External subcontractors could later register and become platform users. Once registered, future job invitations should be delivered directly through the platform instead of following the external email-only flow.
 
@@ -48,7 +48,7 @@ I discovered the issue during testing in the QA environment while validating the
 
 Instead of testing only existing and external subcontractors independently, I tested the transition between both states:
 
-External subcontractor → Account creation → New job invitation
+External subcontractor -> Account creation -> New job invitation
 
 After the external subcontractor created an account, I sent another job invitation and noticed that it was still delivered by email and was missing from the platform.
 
@@ -56,45 +56,11 @@ There was no visible application error, and both account creation and invitation
 
 This indicated that the problem was likely related to how the backend identified the subcontractor rather than the invitation UI itself.
 
-### Bug Report
+### Related Bug Report
 
-Bug ID: 002
-Title: Registered subcontractor continues receiving job invitations through external email flow
-Area: Subcontractor Management / Job Invitations
-Severity: High
-Type: Backend / Data / Business Logic
+[Bug Report 002 - Registered subcontractor continues receiving invitations through external email flow after account creation](../bug-reports/002-subcontractor-invitation-routing.md)
 
-#### Preconditions
-
-* An external subcontractor exists in the system.
-* The subcontractor does not initially have a platform account.
-* A contractor can invite subcontractors to jobs.
-* The external subcontractor can create an account using their existing company information.
-
-#### Steps to Reproduce
-
-1. Add or invite a subcontractor who does not have a platform account.
-2. Confirm that the job invitation is delivered by email.
-3. Create a platform account for the same subcontractor.
-4. Log in and confirm that account creation was successful.
-5. From the contractor account, send a new job invitation to the subcontractor.
-6. Log in as the subcontractor.
-7. Check the job invitations available inside the platform.
-8. Check the subcontractor's email.
-
-#### Actual Result
-
-The registered subcontractor does not see the new job invitation inside the platform.
-
-The invitation continues to be sent by email, following the workflow intended for external subcontractors.
-
-#### Expected Result
-
-Once the subcontractor has successfully created a platform account, future job invitations should be associated with that account and displayed directly inside the platform.
-
-The subcontractor should no longer be processed through the external subcontractor invitation flow.
-
-#### Investigation
+### Investigation
 
 I reproduced the issue with the external-to-registered subcontractor workflow and compared it with a subcontractor who already had an account.
 

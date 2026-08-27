@@ -30,48 +30,17 @@ Because the validation rules were different between the two systems, a user coul
 
 ### How I Found It
 
-One of our largest clients operated in areas close to the U.S.–Mexico border.
+One of our largest clients operated in areas close to the U.S.-Mexico border.
 
 Because location data was important for their workflow, I started testing addresses relevant to that region.
 
 While testing different locations and address formats, I found that some valid addresses containing special characters were accepted by our application but rejected by the third-party system during ticket submission.
 
-### Bug Report
+### Related Bug Report
 
-**Bug ID:** 001
-**Title:** Ticket submission fails for addresses containing unsupported special characters
-**Area:** Ticket Creation / Third-Party Integration
-**Severity:** High
-**Type:** Integration / Validation
+[Bug Report 001 - Ticket submission fails in third-party system when selected address contains unsupported special characters](../bug-reports/001-ticket-submission-special-characters.md)
 
-#### Preconditions
-
-* User is authenticated.
-* User has permission to create tickets.
-* Third-party ticket integration is available.
-* Location selection is enabled.
-
-#### Steps to Reproduce
-
-1. Open the ticket creation workflow.
-2. Complete the required ticket information.
-3. Search for and select an address containing special characters from the location dropdown.
-4. Complete the remaining required fields.
-5. Submit the ticket.
-
-#### Actual Result
-
-The application accepts the selected address and allows the user to submit the ticket.
-
-The ticket then fails during submission to the third-party system because the external platform rejects the address value.
-
-#### Expected Result
-
-The application should only allow address values that can be successfully processed by the integrated third-party system.
-
-If an address is not supported, the user should receive a clear validation message before the ticket is submitted.
-
-#### Investigation
+### Investigation
 
 I reproduced the issue using multiple address variations and compared successful and failed ticket submissions.
 
@@ -81,13 +50,13 @@ This showed that the issue was not caused by the general ticket creation workflo
 
 The problem was caused by inconsistent validation rules between the two integrated systems.
 
-#### Root Cause
+### Root Cause
 
 The main application and the third-party ticketing platform applied different validation rules to the address field.
 
 The main application accepted the value returned by the location API without validating whether that value was compatible with the third-party system.
 
-#### Business Impact
+### Business Impact
 
 This issue affected a business-critical workflow because users could complete the entire ticket creation process, but the ticket would fail before being created in the external platform.
 
@@ -99,13 +68,13 @@ For clients operating in regions where these address formats were common, this c
 * Confusion for end users
 * Reduced reliability of the integration
 
-#### Recommended Fix
+### Recommended Fix
 
 Validate or normalize address values before sending them to the third-party platform.
 
 The application should also handle validation errors returned by the external system and provide a clear message to the user instead of allowing the workflow to fail without useful feedback.
 
-#### QA Validation After Fix
+### QA Validation After Fix
 
 After the fix, the workflow should be validated with:
 

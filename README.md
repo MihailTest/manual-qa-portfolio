@@ -1,25 +1,33 @@
 # Manual QA Portfolio
 
-A collection of QA case studies based on real professional testing experience.
+A collection of manual QA case studies and formal bug reports based on real professional testing experience.
 
 All proprietary information has been removed or generalized to protect client confidentiality.
 
-## Case Studies
+## Repository Structure
 
-### Third-Party Integration Bug Investigation
+### Case Studies
 
-Real-world manual QA case study involving:
+Narrative write-ups focused on investigation, business context, root cause analysis, and QA validation strategy.
 
-- Integration testing
-- Exploratory testing
-- Third-party systems
-- Address validation
-- Root cause investigation
+* [Third-Party Integration Bug Investigation](case-studies/third-party-integration-bug.md)
+* [Subcontractor Invitation Routing Bug Investigation](case-studies/subcontractor-invitation-routing-bug.md)
+
+### Bug Reports
+
+Formal bug reports written in a structure commonly used by real QA teams, including strong titles, metadata, preconditions, reproduction steps, expected result, actual result, impact, and regression scope.
+
+* [Bug Report 001 - Ticket submission fails in third-party system when selected address contains unsupported special characters](bug-reports/001-ticket-submission-special-characters.md)
+* [Bug Report 002 - Registered subcontractor continues receiving job invitations through external email flow after account creation](bug-reports/002-subcontractor-invitation-routing.md)
+
+## Skills Demonstrated
+
+- Manual Testing
+- Exploratory Testing
+- Regression Testing
+- Integration Testing
+- API and backend validation
+- Database testing and SQL
+- Root cause analysis
 - Risk-based testing
-- Regression validation
-
-[View the case study](case-studies/third-party-integration-bug.md)
-
-## Skills
-
-Manual Testing · Exploratory Testing · Regression Testing · API Testing · Integration Testing · SQL · Bug Reporting · Root Cause Analysis
+- Bug reporting
